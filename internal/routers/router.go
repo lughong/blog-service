@@ -3,13 +3,10 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/lughong/blog-service/global"
 	v1 "github.com/lughong/blog-service/internal/routers/api/v1"
 )
 
 func NewRouter() *gin.Engine {
-	gin.SetMode(global.ServerConfig.RunMode)
-
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())

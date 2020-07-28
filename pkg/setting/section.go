@@ -2,14 +2,14 @@ package setting
 
 import "time"
 
-type ServerConfigS struct {
+type ServerSettingS struct {
 	RunMode      string
 	HttpPort     string
 	ReadTimeout  time.Duration
 	WriteTimeout time.Duration
 }
 
-type AppConfigS struct {
+type AppSettingS struct {
 	DefaultPageSize uint8
 	MaxPageSize     uint8
 	LogSavePath     string
@@ -17,7 +17,7 @@ type AppConfigS struct {
 	LogFileExt      string
 }
 
-type DatabaseConfigS struct {
+type DatabaseSettingS struct {
 	DBType      string
 	Host        string
 	Port        uint16
