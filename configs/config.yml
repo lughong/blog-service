@@ -1,0 +1,23 @@
+Server:
+    RunMode: debug 
+    HttpPort: 8080
+    ReadTimeout: 30
+    WriteTimeout: 30
+
+App:
+    DefaultPageSize: 10
+    MaxPageSize: 100
+    LogSavePath: storage/logs
+    LogFileName: app
+    logFileExt: log
+
+Database:
+    DBType: mysql
+    Host: 127.0.0.1
+    Port: 3306
+    Username: root
+    Password: ""
+    DBName: blog
+    Charset: utf8
+    MaxIdleConns: 3
+    

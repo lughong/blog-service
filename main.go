@@ -1,16 +1,43 @@
 package main
 
 import (
-	"log"
+	"net/http"
+	"time"
 
-	"github.com/lughong/blog-service/internal/router"
+	"github.com/lughong/blog-service/global"
+	router "github.com/lughong/blog-service/internal/routers"
+	"github.com/lughong/blog-service/pkg/setting"
 )
+
+func init() {
+	setupConfig()
+}
 
 func main() {
 	r := router.NewRouter()
 
-	addr := ":8080"
-	if err := r.Run(addr); err != nil {
-		log.Fatalf("router.Run error. %s", err)
+	s := &http.Server{
+		Addr:           ":" + global.ServerConfig.HttpPort,
+		Handler:        r,
+		ReadTimeout:    global.ServerConfig.ReadTimeout * time.Second,
+		WriteTimeout:   global.ServerConfig.WriteTimeout * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	s.ListenAndServe()
+}
+
+func setupConfig() {
+	s := setting.NewSetting()
+
+	if err := s.ReadSection("Server", &global.ServerConfig); err != nil {
+		panic(err)
+	}
+
+	if err := s.ReadSection("App", &global.AppConfig); err != nil {
+		panic(err)
+	}
+
+	if err := s.ReadSection("Database", &global.DatabaseConfig); err != nil {
+		panic(err)
 	}
 }
