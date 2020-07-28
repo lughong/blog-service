@@ -1,11 +1,11 @@
 package model
 
 type Model struct {
-	ID        uint32 `json:"id"`
-	CreateOn  uint32 `json:"create_on"`
-	CreateBy  string `json:"create_by"`
-	ModifyOn  uint32 `json:"modify_on"`
-	ModifyBy  string `json:"modify_by"`
-	IsDel     uint8  `json:"is_del"`
-	DeletedBy string `json:"delete_by"`
+	ID         uint32 `json:"id"`
+	CreatedOn  uint32 `json:"created_on"`
+	CreatedBy  string `json:"created_by"`
+	ModifiedOn uint32 `json:"modified_on"`
+	ModifiedBy string `json:"modified_by"`
+	IsDel      uint8  `json:"is_del"`
+	DeletedOn  uint32 `json:"deleted_on"`
 }

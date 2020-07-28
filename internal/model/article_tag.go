@@ -7,10 +7,6 @@ type ArticleTag struct {
 	ArticleID uint32 `json:"article_id"`
 }
 
-func NewArticleTag() ArticleTag {
-	return ArticleTag{}
-}
-
-func (at *ArticleTag) TableName() string {
+func (at ArticleTag) TableName() string {
 	return "article_tag"
 }
