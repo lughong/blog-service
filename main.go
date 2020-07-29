@@ -7,12 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/lughong/blog-service/global"
+	"github.com/lughong/blog-service/internal/model"
 	router "github.com/lughong/blog-service/internal/routers"
 	"github.com/lughong/blog-service/pkg/setting"
 )
 
 func init() {
 	setupSetting()
+	setupDatabase()
 }
 
 func main() {
@@ -43,4 +45,13 @@ func setupSetting() {
 	if err := s.ReadSection("Database", &global.DatabaseSetting); err != nil {
 		panic(err)
 	}
+}
+
+func setupDatabase() {
+	db, err := model.NewDBEngine()
+	if err != nil {
+		panic(err)
+	}
+
+	global.DBEngine = db
 }

@@ -19,5 +19,8 @@ Database:
     Password: ""
     DBName: blog
     Charset: utf8
-    MaxIdleConns: 3
+    ParseTime: true
+    Loc: Local
+    MaxIdleConns: 10
+    MaxOpenConns: 30
     

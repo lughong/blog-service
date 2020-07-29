@@ -18,14 +18,17 @@ type AppSettingS struct {
 }
 
 type DatabaseSettingS struct {
-	DBType      string
-	Host        string
-	Port        uint16
-	Username    string
-	Password    string
-	DBName      string
-	Charset     string
-	MaxIdleConn uint8
+	DBType       string
+	Host         string
+	Port         uint16
+	Username     string
+	Password     string
+	DBName       string
+	Charset      string
+	ParseTime    bool
+	Loc          string
+	MaxIdleConns int
+	MaxOpenConns int
 }
 
 func (s *Setting) ReadSection(key string, data interface{}) error {
