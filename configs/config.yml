@@ -18,6 +18,7 @@ Database:
     Username: root
     Password: ""
     DBName: blog
+    TablePrefix: blog_
     Charset: utf8
     ParseTime: true
     Loc: Local

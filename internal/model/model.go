@@ -10,7 +10,7 @@ import (
 )
 
 type Model struct {
-	ID         uint32 `json:"id"`
+	Id         uint32 `json:"id"`
 	CreatedOn  uint32 `json:"created_on"`
 	CreatedBy  string `json:"created_by"`
 	ModifiedOn uint32 `json:"modified_on"`
@@ -35,6 +35,12 @@ func NewDBEngine() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	if global.ServerSetting.RunMode == "debug" {
+		db.LogMode(true)
+	}
+
+	db.SingularTable(true)
 
 	db.DB().SetMaxIdleConns(global.DatabaseSetting.MaxIdleConns)
 	db.DB().SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)

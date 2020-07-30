@@ -21,8 +21,9 @@ func NewError(code int, msg string) *Error {
 	codes[code] = msg
 
 	return &Error{
-		code: code,
-		msg:  msg,
+		code:    code,
+		msg:     msg,
+		details: make([]string, 0),
 	}
 }
 
@@ -34,20 +35,20 @@ func (e *Error) Msg() string {
 	return e.msg
 }
 
-func (e *Error) Error() string {
-	return fmt.Sprintf("错误码: %d, 错误信息: %s", e.code, e.msg)
-}
-
-func (e *Error) Msgf(args []interface{}) string {
-	return fmt.Sprintf(e.msg, args...)
-}
-
 func (e *Error) Details() []string {
 	return e.details
 }
 
+func (e *Error) Error() string {
+	return fmt.Sprintf("错误码: %d, 错误信息: %s", e.code, e.msg)
+}
+
+func (e *Error) Msgf(args ...interface{}) string {
+	return fmt.Sprintf(e.msg, args...)
+}
+
 func (e *Error) WithDetails(details ...string) *Error {
-	e.details = make([]string, 0)
+	e.details = []string{}
 
 	for _, d := range details {
 		e.details = append(e.details, d)
@@ -57,11 +58,17 @@ func (e *Error) WithDetails(details ...string) *Error {
 }
 
 func (e *Error) StatusCode() int {
-	switch e.code {
-	case Success.code:
+	switch e.Code() {
+	case Success.Code():
 		return http.StatusOK
-	case TooManyRequests.code:
+	case NotFound.Code():
+		return http.StatusNotFound
+	case UnAuthorization.Code():
+		return http.StatusUnauthorized
+	case TooManyRequests.Code():
 		return http.StatusTooManyRequests
+	case InternalServerError.Code():
+		return http.StatusInternalServerError
 	}
 
 	return http.StatusInternalServerError

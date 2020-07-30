@@ -1,0 +1,8 @@
+INFO：2020/07/30 11:48:01 logger.go:120: {"callers":[],"level":"debug","msg":"test logger"}
+2020/07/30 13:15:04 logger.go:122: {"callers":null,"level":"debug","message":"test debug","time":1596086104358098832}
+2020/07/30 13:15:04 logger.go:122: {"callers":null,"level":"debug","message":"test debug bbb","time":1596086104358230684}
+2020/07/30 13:15:04 logger.go:124: {"callers":null,"level":"info","message":"test info","time":1596086104358245226}
+2020/07/30 13:15:04 logger.go:124: {"callers":null,"level":"info","message":"test info bbb","time":1596086104358254244}
+2020/07/30 13:15:04 logger.go:128: {"callers":null,"level":"error","message":"test error","time":1596086104358261282}
+2020/07/30 13:15:04 logger.go:128: {"callers":null,"level":"error","message":"test error bbb","time":1596086104358273647}
+2020/07/30 13:15:04 logger.go:130: {"callers":null,"level":"fatal","message":"test fatal","time":1596086104358281384}
