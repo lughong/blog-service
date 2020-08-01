@@ -54,47 +54,62 @@ func NewLogger(w io.Writer, prefix string, flag int) *Logger {
 }
 
 func (l *Logger) clone() *Logger {
-	cl := *l
+	ll := *l
 
-	return &cl
+	return &ll
 }
 
 func (l *Logger) WithLevel(lvl Level) *Logger {
-	cl := l.clone()
+	ll := l.clone()
 
-	cl.level = lvl
-	return cl
+	ll.level = lvl
+	return ll
 }
 
 func (l *Logger) WithFiles(files Files) *Logger {
-	cl := l.clone()
-	if cl.files == nil {
-		cl.files = make(Files)
+	ll := l.clone()
+	if ll.files == nil {
+		ll.files = make(Files)
 	}
 
 	for k, f := range files {
-		cl.files[k] = f
+		ll.files[k] = f
 	}
 
-	return cl
+	return ll
 }
 
 func (l *Logger) WithCaller(skip int) *Logger {
-	cl := l.clone()
+	ll := l.clone()
 
 	pc, file, line, ok := runtime.Caller(skip)
 	if ok {
 		f := runtime.FuncForPC(pc)
-		cl.callers = []string{
+		ll.callers = []string{
 			fmt.Sprintf("%s, %d, %s", file, line, f.Name()),
 		}
 	}
 
-	return cl
+	return ll
 }
 
-func (l *Logger) WithCallerFrames() {
+func (l *Logger) WithCallerFrames() *Logger {
+	minDepth := 0
+	maxDepth := 25
 
+	pc := make([]uintptr, maxDepth)
+	n := runtime.Callers(minDepth, pc)
+	frames := runtime.CallersFrames(pc[:n])
+
+	callers := make([]string, 0)
+	for frame, more := frames.Next(); more; frame, more = frames.Next() {
+		callers = append(callers, fmt.Sprintf("%s, %d, %s", frame.File, frame.Line, frame.Function))
+	}
+
+	ll := l.clone()
+	ll.callers = callers
+
+	return ll
 }
 
 func (l *Logger) JsonFormat(message string) Files {
