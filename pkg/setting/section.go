@@ -10,8 +10,8 @@ type ServerSettingS struct {
 }
 
 type AppSettingS struct {
-	DefaultPageSize uint8
-	MaxPageSize     uint8
+	DefaultPageSize int
+	MaxPageSize     int
 	LogSavePath     string
 	LogFileName     string
 	LogFileExt      string
@@ -20,7 +20,7 @@ type AppSettingS struct {
 type DatabaseSettingS struct {
 	DBType       string
 	Host         string
-	Port         uint16
+	Port         int
 	Username     string
 	Password     string
 	DBName       string

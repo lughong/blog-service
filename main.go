@@ -103,7 +103,7 @@ func setupLogger() error {
 		l,
 		"",
 		log.Ldate|log.Ltime|log.Lshortfile,
-	)
+	).WithCaller(2)
 
 	return nil
 }
