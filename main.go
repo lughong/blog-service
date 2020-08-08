@@ -30,6 +30,10 @@ func init() {
 	}
 }
 
+// @title Blog-service example API
+// @version 1.0
+// @description This is a sample blog service.
+// @termsOfService https://github.com/lughong/blog-service
 func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	r := router.NewRouter()
