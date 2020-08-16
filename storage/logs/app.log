@@ -6,3 +6,4 @@ INFO：2020/07/30 11:48:01 logger.go:120: {"callers":[],"level":"debug","msg":"t
 2020/07/30 13:15:04 logger.go:128: {"callers":null,"level":"error","message":"test error","time":1596086104358261282}
 2020/07/30 13:15:04 logger.go:128: {"callers":null,"level":"error","message":"test error bbb","time":1596086104358273647}
 2020/07/30 13:15:04 logger.go:130: {"callers":null,"level":"fatal","message":"test fatal","time":1596086104358281384}
+2020/08/17 00:05:39 logger.go:143: {"callers":["/Users/apple/lughong/github.com/blog-service/main.go, 28, main.init.0"],"level":"error","message":"app.BindAndValid errs: ,State必须是[0 1]中的一个","time":1597593939603079000}

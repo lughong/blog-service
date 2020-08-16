@@ -48,7 +48,7 @@ func (r *Response) ToResponseList(list interface{}, totalRows int) {
 	)
 }
 
-func (r *Response) ToErrorResponse(err errcode.Error) {
+func (r *Response) ToErrorResponse(err *errcode.Error) {
 	response := gin.H{"code": err.Code(), "msg": err.Msg()}
 	details := err.Details()
 	if len(details) > 0 {
