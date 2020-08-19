@@ -10,7 +10,7 @@ type Service struct {
 	dao *dao.Dao
 }
 
-func NewService(ctx context.Context, dao *dao.Dao) Service {
+func New(ctx context.Context, dao *dao.Dao) Service {
 	return Service{
 		ctx: ctx,
 		dao: dao,

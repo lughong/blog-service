@@ -11,7 +11,7 @@ import (
 )
 
 type Model struct {
-	Id         uint32 `json:"id"`
+	ID         uint32 `json:"id"`
 	CreatedOn  uint32 `json:"created_on"`
 	CreatedBy  string `json:"created_by"`
 	ModifiedOn uint32 `json:"modified_on"`
@@ -97,7 +97,7 @@ func deleteCallBack(scope *gorm.Scope) {
 					scope.AddToVars(1),
 					addExtraSpaceIfExist(scope.CombinedConditionSql()),
 					addExtraSpaceIfExist(extraOption),
-			)).Exec()
+				)).Exec()
 		} else {
 			scope.Raw(fmt.Sprintf(
 				"DELETE FROM %v%v%v",

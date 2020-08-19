@@ -6,7 +6,7 @@ type Dao struct {
 	engine *gorm.DB
 }
 
-func NewDao(db *gorm.DB) *Dao {
+func New(db *gorm.DB) *Dao {
 	return &Dao{
 		engine: db,
 	}

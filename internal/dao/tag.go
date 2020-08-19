@@ -7,16 +7,16 @@ import (
 
 func (d *Dao) CountTag(name string, state uint8) (int, error) {
 	tag := model.Tag{
-		Name: name,
+		Name:  name,
 		State: state,
 	}
 
 	return tag.Count(d.engine)
 }
 
-func (d *Dao) GetTagList(name string, state uint8, page, pageSize int) ([]*model.Tag, error){
+func (d *Dao) GetTagList(name string, state uint8, page, pageSize int) ([]*model.Tag, error) {
 	tag := model.Tag{
-		Name: name,
+		Name:  name,
 		State: state,
 	}
 
@@ -26,7 +26,7 @@ func (d *Dao) GetTagList(name string, state uint8, page, pageSize int) ([]*model
 
 func (d *Dao) CreateTag(name string, state uint8, createBy string) error {
 	tag := model.Tag{
-		Name: name,
+		Name:  name,
 		State: state,
 		Model: &model.Model{
 			CreatedBy: createBy,
@@ -38,10 +38,10 @@ func (d *Dao) CreateTag(name string, state uint8, createBy string) error {
 
 func (d *Dao) UpdateTag(id uint32, name string, state uint8, modifiedBy string) error {
 	tag := model.Tag{
-		Name: name,
+		Name:  name,
 		State: state,
 		Model: &model.Model{
-			Id: id,
+			ID:         id,
 			ModifiedBy: modifiedBy,
 		},
 	}
@@ -52,7 +52,7 @@ func (d *Dao) UpdateTag(id uint32, name string, state uint8, modifiedBy string) 
 func (d *Dao) DeleteTag(id uint32) error {
 	tag := model.Tag{
 		Model: &model.Model{
-			Id: id,
+			ID: id,
 		},
 	}
 
