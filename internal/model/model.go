@@ -45,7 +45,7 @@ func NewDBEngine() (*gorm.DB, error) {
 
 	db.Callback().Create().Replace("gorm:update_time_stamp", updateTimeStampForCreateCallBack)
 	db.Callback().Update().Replace("gorm:update_time_stamp", updateTimeStampForUpdateCallBack)
-	db.Callback().Delete().Replace("gorm:update", deleteCallBack)
+	db.Callback().Delete().Replace("gorm:delete", deleteCallBack)
 
 	db.DB().SetMaxIdleConns(global.DatabaseSetting.MaxIdleConns)
 	db.DB().SetMaxOpenConns(global.DatabaseSetting.MaxOpenConns)
@@ -87,6 +87,7 @@ func deleteCallBack(scope *gorm.Scope) {
 		isDelField, hasIsDelField := scope.FieldByName("IsDel")
 		if !scope.Search.Unscoped && hasDeletedOnField && hasIsDelField {
 			now := time.Now().Unix()
+			scope.SQLVars = []interface{}{}
 			scope.Raw(
 				fmt.Sprintf(
 					"UPDATE %v SET %v=%v,%v=%v%v%v",

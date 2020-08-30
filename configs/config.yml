@@ -16,7 +16,7 @@ Database:
     Host: 127.0.0.1
     Port: 3306
     Username: root
-    Password: ""
+    Password: "123456"
     DBName: blog
     TablePrefix: blog_
     Charset: utf8
