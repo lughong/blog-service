@@ -22,6 +22,16 @@ func (t Tag) TableName() string {
 	return "tag"
 }
 
+func (t Tag) Get(db *gorm.DB) (Tag, error) {
+	var tag Tag
+
+	if err := db.Model(&t).Where("state = ? AND is_del = ?", t.State, 0).First(&tag).Error; err != nil {
+		return tag, err
+	}
+
+	return tag, nil
+}
+
 func (t Tag) Count(db *gorm.DB) (int, error) {
 	var count int
 	if t.Name != "" {

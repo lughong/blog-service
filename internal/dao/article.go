@@ -6,24 +6,24 @@ import (
 )
 
 type Article struct {
-	ID uint32 `json:"id"`
-	TagID uint32 `json:"tag_id"`
-	Title string `json:"title"`
-	Desc string `json:"desc"`
-	Content string `json:"content"`
+	ID            uint32 `json:"id"`
+	TagID         uint32 `json:"tag_id"`
+	Title         string `json:"title"`
+	Desc          string `json:"desc"`
+	Content       string `json:"content"`
 	CoverImageUrl string `json:"cover_image_url"`
-	CreatedBy string `json:"created_by"`
-	ModifiedBy string `json:"modified_by"`
-	State   uint8  `json:"state"`
+	CreatedBy     string `json:"created_by"`
+	ModifiedBy    string `json:"modified_by"`
+	State         uint8  `json:"state"`
 }
 
 func (d *Dao) CreateArticle(param *Article) (*model.Article, error) {
-	article := model.Article {
-		Title: param.Title,
-		Desc: param.Desc,
-		Content: param.Content,
+	article := model.Article{
+		Title:         param.Title,
+		Desc:          param.Desc,
+		Content:       param.Content,
 		CoverImageUrl: param.CoverImageUrl,
-		State: param.State,
+		State:         param.State,
 		Model: &model.Model{
 			CreatedBy: param.CreatedBy,
 		},
@@ -32,7 +32,7 @@ func (d *Dao) CreateArticle(param *Article) (*model.Article, error) {
 	return article.Create(d.engine)
 }
 
-func (d *Dao) UpdateArticle(param *model.Article) error {
+func (d *Dao) UpdateArticle(param *Article) error {
 	article := model.Article{
 		Model: &model.Model{
 			ID: param.ID,
@@ -41,7 +41,7 @@ func (d *Dao) UpdateArticle(param *model.Article) error {
 
 	values := map[string]interface{}{
 		"modified_by": param.ModifiedBy,
-		"state": param.State,
+		"state":       param.State,
 	}
 	if param.Title != "" {
 		values["title"] = param.Title
