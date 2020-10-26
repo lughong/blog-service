@@ -27,7 +27,7 @@ type ArticleListRequest struct {
 }
 
 type ArticleCreateRequest struct {
-	TagID		  uint32 `form:"tag_id" binding:"required,gte=1"`
+	TagID         uint32 `form:"tag_id" binding:"required,gte=1"`
 	Title         string `form:"title" binding:"required,min=2,max=100"`
 	Desc          string `form:"desc" binding:"required,min=2,max=100"`
 	Content       string `form:"content" binding:"required,min=2,max=255"`
@@ -38,7 +38,7 @@ type ArticleCreateRequest struct {
 
 type ArticleUpdateRequest struct {
 	ID            uint32 `form:"id" binding:"required,gte=1"`
-	TagID		  uint32 `form:"tag_id" binding:"required,gte=1"`
+	TagID         uint32 `form:"tag_id" binding:"required,gte=1"`
 	Title         string `form:"title" binding:"required,min=2,max=100"`
 	Desc          string `form:"desc" binding:"required,min=2,max=100"`
 	Content       string `form:"content" binding:"required,min=2,max=255"`
@@ -52,7 +52,7 @@ type ArticleDeleteRequest struct {
 }
 
 func (src Service) GetArticle(params *ArticleRequest) (*Article, error) {
-	article , err := src.dao.GetArticle(params.ID, params.State)
+	article, err := src.dao.GetArticle(params.ID, params.State)
 	if err != nil {
 		return nil, err
 	}
@@ -68,13 +68,13 @@ func (src Service) GetArticle(params *ArticleRequest) (*Article, error) {
 	}
 
 	return &Article{
-		ID: article.ID,
-		Title: article.Title,
-		Desc: article.Desc,
-		Content: article.Content,
+		ID:            article.ID,
+		Title:         article.Title,
+		Desc:          article.Desc,
+		Content:       article.Content,
 		CoverImageUrl: article.CoverImageUrl,
-		State: article.State,
-		Tag: &tag,
+		State:         article.State,
+		Tag:           &tag,
 	}, nil
 }
 
@@ -92,10 +92,10 @@ func (src Service) GetArticleList(params *ArticleListRequest, pager app.Pager) (
 	var articleList []*Article
 	for _, article := range articles {
 		articleList = append(articleList, &Article{
-			ID: article.ArticleID,
-			Title: article.ArticleTitle,
-			Desc: article.ArticleDesc,
-			Content: article.Content,
+			ID:            article.ArticleID,
+			Title:         article.ArticleTitle,
+			Desc:          article.ArticleDesc,
+			Content:       article.Content,
 			CoverImageUrl: article.CoverImageUrl,
 			Tag: &model.Tag{
 				Name: article.TagName,

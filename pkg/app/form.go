@@ -1,10 +1,11 @@
 package app
 
 import (
+	"strings"
+
 	"github.com/gin-gonic/gin"
 	ut "github.com/go-playground/universal-translator"
 	"github.com/go-playground/validator/v10"
-	"strings"
 )
 
 type ValidError struct {
@@ -23,7 +24,8 @@ func (v ValidErrors) Error() string {
 }
 
 func (v ValidErrors) Errors() []string {
-	errors := make([]string, len(v))
+	var errors []string
+
 	for _, err := range v {
 		errors = append(errors, err.Error())
 	}
