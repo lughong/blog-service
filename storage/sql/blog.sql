@@ -23,6 +23,7 @@ create table `article`(
 	`title` varchar(100) not null default '' comment '文章标题',
 	`desc` varchar(100) not null default '' comment '文章描述',
 	`content` text not null comment '文章内容',
+	`cover_image_url` varchar(128) not null default '' comment '封面图片网址',
 	`created_on` int(10) unsigned not null default '0' comment '创建时间',
     `created_by` varchar(100) not null default '' comment '创建人',
     `modified_on` int(10) unsigned not null default '0' comment '修改时间',

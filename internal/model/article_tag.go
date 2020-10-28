@@ -16,7 +16,7 @@ func (at ArticleTag) TableName() string {
 func (at ArticleTag) GetByAID(db *gorm.DB) (ArticleTag, error) {
 	var articleTag ArticleTag
 
-	err := db.Where("tag_id = ? AND is_del = ?", at.TagID, 0).First(&articleTag).Error
+	err := db.Where("article_id = ? AND is_del = ?", at.ArticleID, 0).First(&articleTag).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return articleTag, err
 	}

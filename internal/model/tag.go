@@ -25,7 +25,7 @@ func (t Tag) TableName() string {
 func (t Tag) Get(db *gorm.DB) (Tag, error) {
 	var tag Tag
 
-	if err := db.Model(&t).Where("state = ? AND is_del = ?", t.State, 0).First(&tag).Error; err != nil {
+	if err := db.Where("id = ? AND state = ? AND is_del = ?", t.ID, t.State, 0).First(&tag).Error; err != nil {
 		return tag, err
 	}
 

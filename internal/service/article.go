@@ -18,7 +18,7 @@ type Article struct {
 
 type ArticleRequest struct {
 	ID    uint32 `form:"id" binding:"required,gte=1"`
-	State uint8  `form:"state" binding:"required,oneof=0 1"`
+	State uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
 
 type ArticleListRequest struct {
@@ -43,7 +43,7 @@ type ArticleUpdateRequest struct {
 	Desc          string `form:"desc" binding:"required,min=2,max=100"`
 	Content       string `form:"content" binding:"required,min=2,max=255"`
 	CoverImageUrl string `form:"cover_image_url" binding:"required,min=2,max=100"`
-	ModifiedBy    string `form:"created_by" binding:"required,min=2,max=100"`
+	ModifiedBy    string `form:"modified_by" binding:"required,min=2,max=100"`
 	State         uint8  `form:"state,default=1" binding:"oneof=0 1"`
 }
 

@@ -6,6 +6,7 @@ import (
 	"github.com/lughong/blog-service/internal/dao"
 	"github.com/lughong/blog-service/internal/service"
 	"github.com/lughong/blog-service/pkg/app"
+	"github.com/lughong/blog-service/pkg/convert"
 	"github.com/lughong/blog-service/pkg/errcode"
 )
 
@@ -60,7 +61,7 @@ func (a Article) Create(c *gin.Context) {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [put]
 func (a Article) Update(c *gin.Context) {
-	var params service.ArticleUpdateRequest
+	params := service.ArticleUpdateRequest{ID: convert.StrTo(c.Param("id")).MustToUInt32()}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &params)
 	if !valid {
@@ -89,7 +90,7 @@ func (a Article) Update(c *gin.Context) {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [delete]
 func (a Article) Delete(c *gin.Context) {
-	var params service.ArticleDeleteRequest
+	params := service.ArticleDeleteRequest{ID: convert.StrTo(c.Param("id")).MustToUInt32()}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &params)
 	if !valid {
@@ -112,6 +113,7 @@ func (a Article) Delete(c *gin.Context) {
 
 // @Summary 获取多篇文章
 // @Produce json
+// @Param tag_id query int true "标签id"
 // @Param state query int false "状态" Enums(0, 1) default(1)
 // @Param page query int false "页码"
 // @Param page_size query int false "每页数量"
@@ -120,7 +122,7 @@ func (a Article) Delete(c *gin.Context) {
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles [get]
 func (a Article) List(c *gin.Context) {
-	var params service.ArticleListRequest
+	params := service.ArticleListRequest{}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &params)
 	if !valid {
@@ -150,12 +152,13 @@ func (a Article) List(c *gin.Context) {
 // @Summary 获取一篇文章
 // @Produce json
 // @Param id path int true "文章ID"
+// @Param state query int false "状态" Enums(0, 1) default(1)
 // @Success 200 {object} model.Article "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
 // @Failure 500 {object} errcode.Error "内部错误"
 // @Router /api/v1/articles/{id} [get]
 func (a Article) Get(c *gin.Context) {
-	params := service.ArticleRequest{}
+	params := service.ArticleRequest{ID: convert.StrTo(c.Param("id")).MustToUInt32()}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &params)
 	if !valid {
