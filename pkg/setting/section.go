@@ -10,11 +10,14 @@ type ServerSettingS struct {
 }
 
 type AppSettingS struct {
-	DefaultPageSize int
-	MaxPageSize     int
-	LogSavePath     string
-	LogFileName     string
-	LogFileExt      string
+	DefaultPageSize    int
+	MaxPageSize        int
+	LogSavePath        string
+	LogFileName        string
+	LogFileExt         string
+	UploadFileSavePath string
+	UploadFileMaxSize  uint8
+	UploadFileExt      []string
 }
 
 type DatabaseSettingS struct {

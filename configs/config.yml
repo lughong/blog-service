@@ -10,6 +10,12 @@ App:
     LogSavePath: storage/logs
     LogFileName: app
     logFileExt: log
+    UploadFileSavePath: storage/upload/file
+    UploadFileMaxSize: 5
+    UploadFileExt:
+        - jpeg
+        - jpg
+        - png
 
 Database:
     DBType: mysql

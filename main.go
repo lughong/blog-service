@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -12,6 +14,7 @@ import (
 	"github.com/lughong/blog-service/global"
 	"github.com/lughong/blog-service/internal/model"
 	router "github.com/lughong/blog-service/internal/routers"
+	"github.com/lughong/blog-service/pkg/file"
 	"github.com/lughong/blog-service/pkg/logger"
 	"github.com/lughong/blog-service/pkg/setting"
 )
@@ -27,6 +30,10 @@ func init() {
 
 	if err := setupLogger(); err != nil {
 		log.Fatalf("setupLogger error. %s", err)
+	}
+
+	if err := interRootDir(); err != nil {
+		log.Fatalf("interRootDir error. %s", err)
 	}
 }
 
@@ -108,6 +115,28 @@ func setupLogger() error {
 		"",
 		log.Ldate|log.Ltime|log.Lshortfile,
 	).WithCaller(2)
+
+	return nil
+}
+
+func interRootDir() error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+
+	f := file.New()
+
+	var inter func(d string) string
+	inter = func(d string) string {
+		if isExists, _ := f.PathExists(d + "/configs"); isExists {
+			return d
+		}
+
+		return inter(filepath.Dir(d))
+	}
+
+	global.RootDir = inter(cwd)
 
 	return nil
 }
