@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/natefinch/lumberjack"
+	"gopkg.in/natefinch/lumberjack.v2"
 
 	"github.com/lughong/blog-service/global"
 	"github.com/lughong/blog-service/internal/model"
@@ -20,20 +20,20 @@ import (
 )
 
 func init() {
+	if err := interRootDir(); err != nil {
+		log.Fatalf("interRootDir error. %v", err)
+	}
+
 	if err := setupSetting(); err != nil {
-		log.Fatalf("setupSetting error. %s", err)
+		log.Fatalf("setupSetting error. %v", err)
 	}
 
 	if err := setupDBEngine(); err != nil {
-		log.Fatalf("setupDBEngine error. %s", err)
+		log.Fatalf("setupDBEngine error. %v", err)
 	}
 
 	if err := setupLogger(); err != nil {
-		log.Fatalf("setupLogger error. %s", err)
-	}
-
-	if err := interRootDir(); err != nil {
-		log.Fatalf("interRootDir error. %s", err)
+		log.Fatalf("setupLogger error. %v", err)
 	}
 }
 
@@ -70,7 +70,7 @@ func main() {
 }
 
 func setupSetting() error {
-	s := setting.NewSetting()
+	s := setting.NewSetting(global.RootDir)
 
 	if err := s.ReadSection("Server", &global.ServerSetting); err != nil {
 		return err
@@ -101,7 +101,7 @@ func setupLogger() error {
 	l := &lumberjack.Logger{
 		Filename: fmt.Sprintf(
 			"%s/%s.%s",
-			global.AppSetting.LogSavePath,
+			global.RootDir+"/"+global.AppSetting.LogSavePath,
 			global.AppSetting.LogFileName,
 			global.AppSetting.LogFileExt,
 		),
@@ -129,7 +129,7 @@ func interRootDir() error {
 
 	var inter func(d string) string
 	inter = func(d string) string {
-		if isExists, _ := f.PathExists(d + "/configs"); isExists {
+		if isExists := f.PathExists(d + "/configs"); !isExists {
 			return d
 		}
 

@@ -3,8 +3,6 @@ package setting
 import (
 	"log"
 
-	"github.com/lughong/blog-service/global"
-
 	"github.com/spf13/viper"
 )
 
@@ -12,11 +10,11 @@ type Setting struct {
 	vp *viper.Viper
 }
 
-func NewSetting() *Setting {
+func NewSetting(rootPath string) *Setting {
 	vp := viper.New()
 	vp.AddConfigPath("/etc/blog-service")
 	vp.AddConfigPath("$HOME/.blog-service")
-	vp.AddConfigPath(global.RootDir + "configs")
+	vp.AddConfigPath(rootPath + "/configs")
 	vp.SetConfigName("config")
 	vp.SetConfigType("yaml")
 

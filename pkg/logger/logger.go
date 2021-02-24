@@ -134,17 +134,17 @@ func (l *Logger) Output(message string) {
 
 	switch l.level {
 	case LevelDebug:
-		l.newLogger.Print(content)
+		l.newLogger.Println(content)
 	case LevelInfo:
-		l.newLogger.Print(content)
+		l.newLogger.Println(content)
 	case LevelWarn:
-		l.newLogger.Print(content)
+		l.newLogger.Println(content)
 	case LevelError:
-		l.newLogger.Print(content)
+		l.newLogger.Println(content)
 	case LevelFatal:
-		l.newLogger.Fatal(content)
+		l.newLogger.Fatalln(content)
 	case LevelPanic:
-		l.newLogger.Panic(content)
+		l.newLogger.Panicln(content)
 	}
 }
 

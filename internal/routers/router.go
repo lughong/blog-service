@@ -3,9 +3,11 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/lughong/blog-service/docs"
+	"github.com/lughong/blog-service/global"
 	"github.com/lughong/blog-service/internal/middleware"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"net/http"
 
 	v1 "github.com/lughong/blog-service/internal/routers/api/v1"
 )
@@ -34,7 +36,11 @@ func NewRouter() *gin.Engine {
 		apiv1.DELETE("/articles/:id", a.Delete)
 		apiv1.GET("/articles", a.List)
 		apiv1.GET("/articles/:id", a.Get)
+
+		u := v1.NewUpload()
+		apiv1.POST("/upload/file", u.UploadFile)
 	}
+	r.StaticFS("/static", http.Dir(global.RootDir+"/"+global.AppSetting.UploadSavePath))
 
 	return r
 }

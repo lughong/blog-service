@@ -13,4 +13,10 @@ var (
 	ErrorCreateArticleFail  = NewError(20010009, "新增文章失败")
 	ErrorUpdateArticleFail  = NewError(20010010, "更新文章失败")
 	ErrorDeleteArticleFail  = NewError(20010011, "删除文章失败")
+
+	ErrUploadFail           = NewError(20010012, "上传文件失败")
+	ErrUploadMaxSizeFail    = NewError(20010013, "上传文件大小错误")
+	ErrUploadExtensionFail  = NewError(20010014, "上传文件扩展名错误")
+	ErrUploadPermissionFail = NewError(20010015, "上传文件权限错误")
+	ErrUploadSavePathFail   = NewError(20010016, "上传文件目录不存在")
 )

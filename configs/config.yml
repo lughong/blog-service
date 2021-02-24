@@ -1,5 +1,5 @@
 Server:
-    RunMode: debug 
+    RunMode: debug
     HttpPort: 8080
     ReadTimeout: 30
     WriteTimeout: 30
@@ -10,19 +10,20 @@ App:
     LogSavePath: storage/logs
     LogFileName: app
     logFileExt: log
-    UploadFileSavePath: storage/upload/file
-    UploadFileMaxSize: 5
-    UploadFileExt:
-        - jpeg
-        - jpg
-        - png
+    UploadSavePath: storage/uploads
+    UploadServerUrl: http://127.0.0.1:8080/static
+    UploadImageMaxSize: 5 # 单位m
+    UploadImageAllowExts:
+        - .jpeg
+        - .jpg
+        - .png
 
 Database:
     DBType: mysql
-    Host: 127.0.0.1
+    Host: mysql
     Port: 3306
     Username: root
-    Password: "123456"
+    Password: ""
     DBName: blog
     TablePrefix: blog_
     Charset: utf8
@@ -30,4 +31,3 @@ Database:
     Loc: Local
     MaxIdleConns: 10
     MaxOpenConns: 30
-    

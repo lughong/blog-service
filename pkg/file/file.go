@@ -12,12 +12,8 @@ func New() File {
 }
 
 func (f File) CreateFile(fileName string) (bool, error) {
-	isExists, err := f.PathExists(fileName)
-	if err != nil {
-		return false, err
-	}
-
-	if !isExists {
+	isExists := f.PathExists(fileName)
+	if isExists {
 		file, err := os.Create(fileName)
 		if err != nil {
 			return false, err
@@ -29,12 +25,8 @@ func (f File) CreateFile(fileName string) (bool, error) {
 }
 
 func (f File) CreateDir(dirName string) (bool, error) {
-	isExists, err := f.PathExists(dirName)
-	if err != nil {
-		return false, err
-	}
-
-	if !isExists {
+	isExists := f.PathExists(dirName)
+	if isExists {
 		err := os.MkdirAll(dirName, os.ModePerm)
 		if err != nil {
 			return false, err
@@ -44,16 +36,9 @@ func (f File) CreateDir(dirName string) (bool, error) {
 	return true, nil
 }
 
-func (f File) PathExists(path string) (bool, error) {
+func (f File) PathExists(path string) bool {
 	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-
-	return false, err
+	return os.IsNotExist(err)
 }
 
 func (f File) AppendToFile(fileName string, content string) error {
