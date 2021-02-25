@@ -84,6 +84,11 @@ func setupSetting() error {
 		return err
 	}
 
+	if err := s.ReadSection("Jwt", &global.JwtSetting); err != nil {
+		return err
+	}
+	global.JwtSetting.Expire *= time.Second
+
 	return nil
 }
 
@@ -113,8 +118,8 @@ func setupLogger() error {
 	global.Logger = logger.NewLogger(
 		l,
 		"",
-		log.Ldate|log.Ltime|log.Lshortfile,
-	).WithCaller(2)
+		log.Ldate|log.Ltime|log.Llongfile,
+	).WithCaller(3)
 
 	return nil
 }

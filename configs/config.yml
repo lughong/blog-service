@@ -31,3 +31,8 @@ Database:
     Loc: Local
     MaxIdleConns: 10
     MaxOpenConns: 30
+
+Jwt:
+    Secret: abksier039sKDJFJ093rkFDn
+    Issuer: blog-service
+    Expire: 7200

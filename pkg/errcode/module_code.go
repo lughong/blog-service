@@ -19,4 +19,8 @@ var (
 	ErrUploadExtensionFail  = NewError(20010014, "上传文件扩展名错误")
 	ErrUploadPermissionFail = NewError(20010015, "上传文件权限错误")
 	ErrUploadSavePathFail   = NewError(20010016, "上传文件目录不存在")
+
+	ErrUnAuthorizedTokenGenerate = NewError(20010017, "生成令牌错误")
+	ErrUnAuthorizedTokenExpire   = NewError(20010018, "令牌已超时")
+	ErrUnAuthorizedTokenFail     = NewError(20010019, "令牌错误")
 )

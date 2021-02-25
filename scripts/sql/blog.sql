@@ -47,3 +47,17 @@ create table `article_tag`(
     `deleted_on` int(10) unsigned not null default '0' comment '删除时间',
 	PRIMARY KEY(`id`)
 ) engine=Innodb default charset utf8mb4 collate utf8mb4_general_ci comment '文章标签关联表';
+
+drop table if exists `auth`;
+create table `auth`(
+    `id` int(10) unsigned not null auto_increment,
+    `app_key` varchar(20) not null default '' comment 'key',
+    `app_secret` varchar(50) not null default '' comment 'secret',
+    `created_on` int(10) unsigned not null default '0' comment '创建时间',
+    `created_by` varchar(100) not null default '' comment '创建人',
+    `modified_on` int(10) unsigned not null default '0' comment '修改时间',
+    `modified_by` varchar(100) not null default '' comment '修改人',
+    `is_del` tinyint(1) not null default 0 comment '是否已删除：0.未删除，1.已删除',
+    `deleted_on` int(10) unsigned not null default '0' comment '删除时间',
+    PRIMARY KEY(`id`)
+) engine=Innodb default charset utf8mb4 collate utf8mb4_general_ci comment '鉴权表';
