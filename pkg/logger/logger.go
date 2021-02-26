@@ -149,49 +149,49 @@ func (l *Logger) Output(message string) {
 }
 
 func (l *Logger) Debug(v ...interface{}) {
-	l.WithLevel(LevelDebug).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelDebug).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Debugf(format string, v ...interface{}) {
-	l.WithLevel(LevelDebug).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelDebug).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Info(v ...interface{}) {
-	l.WithLevel(LevelInfo).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelInfo).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Infof(format string, v ...interface{}) {
-	l.WithLevel(LevelInfo).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelInfo).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Warn(v ...interface{}) {
-	l.WithLevel(LevelWarn).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelWarn).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Warnf(format string, v ...interface{}) {
-	l.WithLevel(LevelWarn).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelWarn).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Error(v ...interface{}) {
-	l.WithLevel(LevelError).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelError).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Errorf(format string, v ...interface{}) {
-	l.WithLevel(LevelError).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelError).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Fatal(v ...interface{}) {
-	l.WithLevel(LevelFatal).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelFatal).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Fatalf(format string, v ...interface{}) {
-	l.WithLevel(LevelFatal).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelFatal).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }
 
 func (l *Logger) Panic(v ...interface{}) {
-	l.WithLevel(LevelPanic).Output(fmt.Sprint(v...))
+	l.WithLevel(LevelPanic).WithCaller(2).Output(fmt.Sprint(v...))
 }
 
 func (l *Logger) Panicf(format string, v ...interface{}) {
-	l.WithLevel(LevelPanic).Output(fmt.Sprintf(format, v...))
+	l.WithLevel(LevelPanic).WithCaller(2).Output(fmt.Sprintf(format, v...))
 }

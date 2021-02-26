@@ -119,7 +119,7 @@ func setupLogger() error {
 		l,
 		"",
 		log.Ldate|log.Ltime|log.Llongfile,
-	).WithCaller(3)
+	)
 
 	return nil
 }
